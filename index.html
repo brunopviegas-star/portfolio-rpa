@@ -161,10 +161,6 @@
     }
 
     #about {
-      padding-top: 24px;
-    }
-
-    #about {
       padding-top: 14px; /* menos espaço acima do SOBRE MIM */
     }
 
@@ -181,13 +177,7 @@
     #about h2,
     #skills h2,
     #projects h2,
-    
-
     #contact h2 {
-      text-align: center;
-    }
-
-    #skills h2 {
       text-align: center;
     }
 
@@ -204,10 +194,6 @@
       font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
     }
 
-    #about .section-body {
-      font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
-    }
-
     .section-body p + p {
       margin-top: 12px;
     }
@@ -215,6 +201,54 @@
     #skills .section-body,
     #contact .section-body {
       text-align: center;
+    }
+
+    /* SOBRE MIM COM FOTO LADO A LADO */
+    .about-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 900px;
+      margin: 24px auto 0;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-photo {
+      flex-shrink: 0;
+    }
+
+    /* FOTO INTEGRADA, SEM MOLDURA */
+    .about-photo img {
+      display: block;
+      width: 260px;
+      height: auto;
+      object-fit: cover;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      filter: grayscale(100%) contrast(1.1);
+      opacity: 0.95;
+    }
+
+    /* RESPONSIVO (EMPILHA NO MOBILE) */
+    @media (max-width: 780px) {
+      .about-wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-photo img {
+        width: 80%;
+        max-width: 320px;
+      }
+
+      #about .section-body {
+        text-align: center;
+      }
     }
 
     /* SKILLS (CHIPS MINIMALISTAS) */
@@ -465,8 +499,19 @@
       }
     }
 
-      header {
-        padding-bottom: 34px;
+    @media (max-width: 780px) {
+      .about-wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-photo img {
+        width: 82%;
+        max-width: 320px;
+      }
+
+      #about .section-body {
+        text-align: center;
       }
     }
 
@@ -508,10 +553,17 @@
 
       <section id="about">
         <h2>Sobre Mim</h2>
-        <div class="section-body">
-          <p>
-            Sou profissional focado em automações de processos, criação de rotinas automáticas, RPA, otimização de tarefas repetitivas e integração entre sistemas. Busco oportunidades para atuar criando automações reais que economizam tempo e reduzem erros.
-          </p>
+        <div class="about-wrapper">
+          <div class="about-photo">
+            <img src="assets/bruno-viegas.jpg" alt="Foto de Bruno Viegas, profissional de automação de processos">
+          </div>
+          <div class="about-text">
+            <div class="section-body">
+              <p>
+                Sou profissional focado em automações de processos, criação de rotinas automáticas, RPA, otimização de tarefas repetitivas e integração entre sistemas. Busco oportunidades para atuar criando automações reais que economizam tempo e reduzem erros.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
