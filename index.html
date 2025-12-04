@@ -3,117 +3,695 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bruno Viegas - Portfólio de Automações</title>
+  <title>Bruno Viegas • Portfólio de Automações</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #02020b;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --line-soft: #27272f;
+      --line-strong: #3f3f46;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* FUNDO COM TEXTURA (ESTILO MICROCHIP) EM PRETO E BRANCO */
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #020617 0, #02020b 45%, #02020b 100%);
+      color: var(--text-primary);
+      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    .shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER MINIMALISTA */
     header {
-      background: #111827;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+      border-bottom: 1px solid var(--line-soft);
+      padding: 22px 0 40px;
+      backdrop-filter: blur(4px);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.45), transparent 70%);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
     }
-    header p {
-      margin-top: 10px;
-      font-size: 1.2rem;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-bottom: 20px;
-      color: #111827;
-    }
-    .tech-list span {
-      background: #e5e7eb;
-      padding: 6px 12px;
-      border-radius: 8px;
-      margin-right: 8px;
+
+    .nav-logo {
+      font-family: "Space Grotesk", system-ui, sans-serif;
       font-size: 0.9rem;
-      display: inline-block;
-      margin-bottom: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.6);
     }
-    footer {
+
+    .nav-links a {
+      margin-left: 16px;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: #e5e7eb;
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO SEM BOXES */
+    .hero {
+      padding-top: 10px;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      margin: 0 auto;
       text-align: center;
-      padding: 20px;
-      background: #111827;
-      color: white;
-      margin-top: 40px;
+    }
+
+    .hero-title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: clamp(2.1rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      letter-spacing: 0.04em; /* caracteres mais juntos, linhas finas */
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .hero-subtitle {
+      margin-top: 10px;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 0.75rem; /* subtítulo menor */
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .hero-text {
+      margin-top: 26px;
+      font-size: 0.96rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* MAIN FLAT (SEM BOXES) */
+    main {
+      padding: 24px 0 64px;
+    }
+
+    section {
+      padding: 22px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    section:first-of-type {
+      border-top: none;
+    }
+
+    #about {
+      padding-top: 14px; /* menos espaço acima do SOBRE MIM */
+    }
+
+    h2 {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    #skills h2 {
+      text-align: center;
+    }
+
+    #contact h2 {
+      text-align: center;
+    }
+
+    #skills h2 {
+      text-align: center;
+    }
+
+    .section-body {
+      max-width: 780px;
+      font-size: 0.96rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    #about .section-body {
+      font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
+    }
+
+    .section-body p + p {
+      margin-top: 12px;
+    }
+
+    #skills .section-body,
+    #contact .section-body {
+      text-align: center;
+    }
+
+    /* SKILLS (CHIPS MINIMALISTAS) */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .skill {
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      padding: 6px 16px;
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+      border-color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .skill:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+    }
+
+    /* PORTFÓLIO */
+    .portfolio-item {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(39, 39, 47, 0.7);
+    }
+
+    .portfolio-item:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .portfolio-item h3 {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .portfolio-item p {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* PORTFÓLIO (VITRINE) */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .project-card {
+      padding: 18px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line-soft);
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.95);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.98);
+      border-color: #e5e7eb;
+    }
+
+    .project-card h3 {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 0.98rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* MODAL DE HABILIDADES */
+    .skill-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .skill-modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .skill-modal {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 18px;
+      background: #02020b;
+      border-radius: 16px;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.96);
+      padding: 20px 22px 20px;
+      position: relative;
+      animation: skillModalIn 0.24s ease;
+    }
+
+    @keyframes skillModalIn {
+      from {
+        transform: translateY(12px) scale(0.97);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .skill-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .skill-modal-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .skill-modal-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    .skill-modal-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .skill-modal-list li + li {
+      margin-top: 4px;
+    }
+
+    /* CONTATO */
+    .contact-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .contact-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: var(--text-primary);
+      font-size: 0.86rem;
+      font-weight: 300;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.7);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .contact-link:hover {
+      border-color: #e5e7eb;
+      background: #020617;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line-soft);
+      padding: 18px 0 22px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    }
+
+    @media (max-width: 880px) {
+      .nav-links {
+        display: none;
+      }
+
+      header {
+        padding-bottom: 34px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 28px 0 56px;
+      }
+
+      section {
+        padding: 22px 0;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Bruno Viegas</h1>
-    <p>Automação de Processos • RPA • Scripts • Web Automation</p>
+    <div class="shell">
+      <div class="nav">
+        <div class="nav-links">
+          <a href="#about">Sobre</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projetos</a>
+          <a href="#contact">Contato</a>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Bruno Viegas</h1>
+          <p class="hero-subtitle">AUTOMAÇÃO DE PROCESSOS | RPA | SCRIPTS | WEB AUTOMATION</p>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <section>
-    <h2>Sobre Mim</h2>
-    <div class="card">
-      <p>Sou profissional focado em automações de processos, criação de rotinas automáticas, RPA, otimização de tarefas repetitivas e integração entre sistemas. Busco oportunidades para atuar criando automações reais que economizam tempo e reduzem erros.</p>
+  <main>
+    <div class="shell">
+
+      <section id="about">
+        <h2>Sobre Mim</h2>
+        <div class="section-body">
+          <p>
+            Sou profissional focado em automações de processos, criação de rotinas automáticas, RPA, otimização de tarefas repetitivas e integração entre sistemas. Busco oportunidades para atuar criando automações reais que economizam tempo e reduzem erros.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Habilidades</h2>
+        <div class="section-body">
+          <div class="skills">
+            <button class="skill" type="button" data-skill="python">Python</button>
+            <button class="skill" type="button" data-skill="selenium">Selenium</button>
+            <button class="skill" type="button" data-skill="gas">Google Apps Script</button>
+            <button class="skill" type="button" data-skill="web">Automação Web</button>
+            <button class="skill" type="button" data-skill="rpa">RPA</button>
+            <button class="skill" type="button" data-skill="n8n">n8n</button>
+            <button class="skill" type="button" data-skill="apis">APIs</button>
+            <button class="skill" type="button" data-skill="sheets">Automação de Planilhas</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Projetos</h2>
+        <div class="section-body">
+          <div class="projects-grid">
+            <article class="project-card">
+              <h3>Automação de Coleta de Dados em Site</h3>
+              <p><strong>Problema:</strong> Processo manual de conferência de dados que tomava tempo diariamente.</p>
+              <p><strong>Solução:</strong> Script que acessa automaticamente o site, coleta informações e salva em planilha.</p>
+              <p><strong>Tecnologias:</strong> Python, Selenium.</p>
+              <p><strong>Resultados:</strong> Redução de 20 min para 10 segundos por execução.</p>
+            </article>
+
+            <article class="project-card">
+              <h3>Automação para Atualização de Planilhas</h3>
+              <p><strong>Problema:</strong> Planilhas que precisavam ser atualizadas manualmente todos os dias.</p>
+              <p><strong>Solução:</strong> Script em Apps Script que atualiza automaticamente valores, limpa campos e envia alertas.</p>
+              <p><strong>Tecnologias:</strong> Google Apps Script (JavaScript).</p>
+            </article>
+
+            <article class="project-card">
+              <h3>RPA - Preenchimento Automático de Formulários</h3>
+              <p><strong>Problema:</strong> Repetição diária de inserção de dados no sistema interno.</p>
+              <p><strong>Solução:</strong> Automação que preenche formulários e envia informações automaticamente.</p>
+              <p><strong>Tecnologias:</strong> Python, Selenium.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contato</h2>
+        <div class="section-body">
+          <p class="contact-text">Quer automatizar um processo, reduzir custos ou acelerar sua operação?</p>
+          <p class="contact-text"><strong>Vamos conversar!</strong></p>
+          <a class="contact-link" href="mailto:seuemail@exemplo.com">Entrar em contato</a>
+        </div>
+      </section>
+
     </div>
-  </section>
-
-  <section>
-    <h2>Habilidades</h2>
-    <div class="card tech-list">
-      <span>Python</span>
-      <span>Selenium</span>
-      <span>Google Apps Script</span>
-      <span>Automação Web</span>
-      <span>RPA</span>
-      <span>APIs</span>
-      <span>Automação de Planilhas</span>
-    </div>
-  </section>
-
-  <section>
-    <h2>Projetos</h2>
-
-    <div class="card">
-      <h3>Automação de Coleta de Dados em Site</h3>
-      <p><strong>Problema:</strong> Processo manual de conferência de dados que tomava tempo diariamente.</p>
-      <p><strong>Solução:</strong> Script que acessa automaticamente o site, coleta informações e salva em planilha.</p>
-      <p><strong>Tecnologias:</strong> Python, Selenium.</p>
-      <p><strong>Resultados:</strong> Redução de 20 min para 10 segundos por execução.</p>
-    </div>
-
-    <div class="card">
-      <h3>Automação para Atualização de Planilhas</h3>
-      <p><strong>Problema:</strong> Planilhas que precisavam ser atualizadas manualmente todos os dias.</p>
-      <p><strong>Solução:</strong> Script em Apps Script que atualiza automaticamente valores, limpa campos e envia alertas.</p>
-      <p><strong>Tecnologias:</strong> Google Apps Script (JavaScript).</p>
-    </div>
-
-    <div class="card">
-      <h3>RPA - Preenchimento Automático de Formulários</h3>
-      <p><strong>Problema:</strong> Repetição diária de inserção de dados no sistema interno.</p>
-      <p><strong>Solução:</strong> Automação que preenche formulários e envia informações automaticamente.</p>
-      <p><strong>Tecnologias:</strong> Python, Selenium.</p>
-    </div>
-
-  </section>
+  </main>
 
   <footer>
-    © 2025 - Portfólio de Automações • Bruno Viegas
+    <div class="shell">
+      © 2025 - Portfólio de Automações • Bruno Viegas
+    </div>
   </footer>
+
+  <div class="skill-modal-backdrop" aria-hidden="true">
+    <div class="skill-modal" role="dialog" aria-modal="true" aria-labelledby="skill-modal-title">
+      <button class="skill-modal-close" type="button" aria-label="Fechar detalhes da habilidade">&times;</button>
+      <h3 id="skill-modal-title" class="skill-modal-title"></h3>
+      <p class="skill-modal-text"></p>
+      <ul class="skill-modal-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const skillInfo = {
+        python: {
+          title: 'Python',
+          text: 'Linguagem de programação versátil, ideal para automações, integrações e scripts rápidos.',
+          examples: [
+            'Bots para coletar dados em sites (web scraping).',
+            'Integração com APIs para enviar e receber dados automaticamente.',
+            'Rotinas agendadas para gerar relatórios e arquivos diariamente.'
+          ]
+        },
+        selenium: {
+          title: 'Selenium',
+          text: 'Ferramenta para automação de navegadores, simulando cliques, digitação e navegação humana.',
+          examples: [
+            'Preencher formulários em sistemas web de forma automática.',
+            'Coletar informações de páginas que exigem login.',
+            'Testar fluxos em aplicações web de forma repetível.'
+          ]
+        },
+        gas: {
+          title: 'Google Apps Script',
+          text: 'Plataforma baseada em JavaScript para automatizar e conectar produtos Google (Sheets, Gmail, Forms, etc.).',
+          examples: [
+            'Atualizar planilhas automaticamente com dados externos.',
+            'Enviar e-mails de alerta quando certos valores mudam.',
+            'Criar menus e botões personalizados dentro das planilhas.'
+          ]
+        },
+        web: {
+          title: 'Automação Web',
+          text: 'Automatização de fluxos completos em sites e sistemas acessados via navegador.',
+          examples: [
+            'Login automático em portais internos ou de fornecedores.',
+            'Consulta e registro de dados em múltiplos sistemas.',
+            'Extração de relatórios e download de arquivos recorrentes.'
+          ]
+        },
+        rpa: {
+          title: 'RPA',
+          text: 'Automação Robótica de Processos, focada em reproduzir tarefas humanas em sistemas digitais.',
+          examples: [
+            'Ler dados de planilhas e lançar em sistemas internos.',
+            'Mover informações entre ERPs, CRMs e planilhas.',
+            'Padronizar cadastros repetitivos em grandes volumes.'
+          ]
+        },
+        n8n: {
+          title: 'n8n',
+          text: 'Ferramenta de automação low-code para orquestrar integrações entre APIs, bancos de dados e serviços.',
+          examples: [
+            'Criar fluxos que disparam quando um novo registro é criado em uma ferramenta.',
+            'Sincronizar dados entre diferentes plataformas automaticamente.',
+            'Montar pipelines de dados sem precisar codificar tudo do zero.'
+          ]
+        },
+        apis: {
+          title: 'APIs',
+          text: 'Consumo e integração de APIs REST para conectar sistemas e trocar dados de forma estruturada.',
+          examples: [
+            'Conectar sistemas internos a serviços de terceiros (pagamentos, ERPs, CRMs).',
+            'Buscar dados externos (cotações, status de pedidos, clientes) em tempo real.',
+            'Criar automações que disparam com base em webhooks.'
+          ]
+        },
+        sheets: {
+          title: 'Automação de Planilhas',
+          text: 'Automatização de planilhas para reduzir tarefas repetitivas e garantir consistência dos dados.',
+          examples: [
+            'Limpar, padronizar e validar dados automaticamente.',
+            'Atualizar dashboards sem intervenção manual.',
+            'Gerar relatórios prontos para envio com um único comando.'
+          ]
+        }
+      };
+
+      const backdrop = document.querySelector('.skill-modal-backdrop');
+      const modalTitle = document.querySelector('.skill-modal-title');
+      const modalText = document.querySelector('.skill-modal-text');
+      const modalList = document.querySelector('.skill-modal-list');
+      const closeBtn = document.querySelector('.skill-modal-close');
+      const skillButtons = document.querySelectorAll('.skill');
+
+      if (!backdrop || !modalTitle || !modalText || !modalList || !closeBtn || !skillButtons.length) return;
+
+      function openModal(key) {
+        const info = skillInfo[key];
+        if (!info) return;
+
+        modalTitle.textContent = info.title;
+        modalText.textContent = info.text;
+        modalList.innerHTML = '';
+
+        info.examples.forEach(function (ex) {
+          const li = document.createElement('li');
+          li.textContent = ex;
+          modalList.appendChild(li);
+        });
+
+        backdrop.classList.add('is-open');
+        backdrop.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('is-open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+
+      skillButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const key = btn.getAttribute('data-skill');
+          openModal(key);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      backdrop.addEventListener('click', function (event) {
+        if (event.target === backdrop) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
