@@ -54,7 +54,7 @@
     .nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 32px;
     }
 
@@ -71,8 +71,13 @@
       background: rgba(0, 0, 0, 0.6);
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
     .nav-links a {
-      margin-left: 16px;
       font-size: 0.82rem;
       font-weight: 300;
       color: var(--text-secondary);
@@ -143,16 +148,20 @@
 
     /* MAIN FLAT (SEM BOXES) */
     main {
-      padding: 24px 0 64px;
+      padding: 0 0 56px;
     }
 
     section {
-      padding: 22px 0;
+      padding: 32px 0;
       border-top: 1px solid var(--line-soft);
     }
 
     section:first-of-type {
       border-top: none;
+    }
+
+    #about {
+      padding-top: 24px;
     }
 
     #about {
@@ -183,10 +192,15 @@
 
     .section-body {
       max-width: 780px;
+      margin: 0 auto;
       font-size: 0.96rem;
       line-height: 1.8;
       color: var(--text-secondary);
       font-weight: 300;
+    }
+
+    #about .section-body {
+      font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
     }
 
     #about .section-body {
@@ -435,9 +449,20 @@
     }
 
     @media (max-width: 880px) {
-      .nav-links {
-        display: none;
+      .nav {
+        margin-bottom: 24px;
       }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 10px;
+      }
+
+      header {
+        padding-bottom: 28px;
+      }
+    }
 
       header {
         padding-bottom: 34px;
