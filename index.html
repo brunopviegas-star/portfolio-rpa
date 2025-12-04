@@ -10,11 +10,11 @@
 
   <style>
     :root {
-      --bg: #02020b;
+      --bg: #02010a;
       --text-primary: #f9fafb;
-      --text-secondary: #9ca3af;
-      --line-soft: #27272f;
-      --line-strong: #3f3f46;
+      --text-secondary: #6b7280;
+      --line-soft: #111827;
+      --line-strong: #1f2937;
     }
 
     * {
@@ -29,7 +29,7 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #020617 0, #02020b 45%, #02020b 100%);
+      background: radial-gradient(circle at top, #020617 0, #02010a 40%, #000000 100%);
       color: var(--text-primary);
       font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -142,7 +142,7 @@
       padding-top: 14px;
     }
 
-    h2 {
+        h2 {
       font-family: "Space Grotesk", system-ui, sans-serif;
       font-size: 0.9rem;
       font-weight: 300;
@@ -151,6 +151,11 @@
       margin-bottom: 16px;
       color: var(--text-secondary);
       text-align: center;
+    }
+
+    /* Título da seção Sobre Mim alinhado à esquerda */
+    #about h2 {
+      text-align: left;
     }
 
     .section-body {
@@ -163,9 +168,13 @@
     }
 
     #about .section-body {
-      font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
-      max-width: 460px;  /* caixa de texto mais estreita */
-      margin: 0;         /* alinha dentro do flex em vez de centralizar */
+      font-size: 0.9rem;
+      max-width: none;
+      margin: 0;
+    }
+
+    #about .about-text {
+      max-width: 460px;
     }
 
     .section-body p + p {
@@ -177,46 +186,48 @@
       text-align: center;
     }
 
-        /* SOBRE MIM - CARD ASSIMÉTRICO COM FOTO INVADINDO A BORDA */
+            /* SOBRE MIM - LAYOUT ASSIMÉTRICO COM FOTO PUXADA PARA CIMA */
     .about-wrapper {
-      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.3fr);
+      align-items: center;
+      gap: 56px;
       max-width: 980px;
       margin: 32px auto 0;
-      padding: 28px 28px 26px;
-      border-radius: 24px;
-      border: 1px solid var(--line-soft);
-      background:
-        radial-gradient(circle at top left, rgba(15, 23, 42, 0.8), rgba(2, 2, 11, 0.98)),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.7), rgba(2, 2, 11, 0.98));
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) auto;
-      gap: 40px;
-      align-items: center;
-      overflow: visible;
-      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.96);
     }
 
     .about-text {
-      flex: 1;
+      /* o texto acompanha o grid, não precisa de muito ajuste aqui */
     }
 
     .about-photo {
       position: relative;
-      width: 260px;
-      height: 300px;
-      transform: translate(12px, -32px); /* foto invadindo a borda do card */
+      flex-shrink: 0;
+      width: 280px;
+      height: 320px;
+      transform: translateY(-28px); /* puxa a foto levemente para cima para gerar assimetria vertical */
     }
 
+        /* Fundo degradê mesclando com o background, com a foto por baixo */
     .about-photo::before {
       content: "";
       position: absolute;
-      inset: 0;
-      border-radius: 24px;
-      border: 1px solid var(--line-strong);
+      inset: -1px;
+      border-radius: 26px;
       background:
-        radial-gradient(circle at 18% 20%, transparent 0 40%, rgba(3, 7, 18, 0.96) 60%),
-        radial-gradient(circle at 82% 72%, transparent 0 34%, rgba(3, 7, 18, 0.97) 58%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+        linear-gradient(145deg,
+          rgba(15, 23, 42, 0.05),
+          rgba(148, 163, 184, 0.55),
+          rgba(15, 23, 42, 0.05)
+        );
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.96);
+      /* cria uma borda em degradê com centro transparente */
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      padding: 1px;
       pointer-events: none;
       z-index: 1;
     }
@@ -227,7 +238,7 @@
       width: calc(100% + 36px);
       height: calc(100% + 36px);
       object-fit: cover;
-      filter: grayscale(100%) contrast(1.08) brightness(1.02);
+      filter: grayscale(100%) contrast(1.1) brightness(0.9);
       opacity: 0.98;
       transform: translate3d(0, 0, 0);
       z-index: 0;
@@ -452,36 +463,16 @@
       }
     }
 
-    @media (max-width: 780px) {
+        @media (max-width: 780px) {
       .about-wrapper {
         grid-template-columns: minmax(0, 1fr);
-        padding: 22px 20px 20px;
-        text-align: center;
+        gap: 32px;
+        max-width: 900px;
+        margin-top: 24px;
+        text-align: left;
       }
 
-      .about-photo {
-        margin: 0 auto;
-        transform: translate(0, -16px);
-        width: min(80vw, 280px);
-        height: 300px;
-      }
 
-      #about .section-body {
-        text-align: center;
-        margin: 0 auto;
-      }
-    }
-
-      .about-photo {
-        width: min(80vw, 320px);
-        height: 340px;
-      }
-
-      #about .section-body {
-        text-align: center;
-        margin: 0 auto;
-      }
-    }
 
     @media (max-width: 600px) {
       main {
@@ -520,9 +511,9 @@
     <div class="shell">
 
       <section id="about">
-        <h2>Sobre Mim</h2>
         <div class="about-wrapper">
           <div class="about-text">
+            <h2>Sobre Mim</h2>
             <div class="section-body">
               <p>
                 Sou profissional focado em automações de processos, criação de rotinas automáticas, RPA, otimização de tarefas repetitivas e integração entre sistemas. Busco oportunidades para atuar criando automações reais que economizam tempo e reduzem erros.
