@@ -177,15 +177,23 @@
       text-align: center;
     }
 
-    /* SOBRE MIM COM FOTO LADO A LADO */
+        /* SOBRE MIM - CARD ASSIMÉTRICO COM FOTO INVADINDO A BORDA */
     .about-wrapper {
-      display: flex;
-      flex-direction: row; /* foto à esquerda, texto à direita */
-      align-items: stretch;
-      justify-content: space-between;
-      gap: 48px;
-      max-width: 900px;
-      margin: 24px auto 0;
+      position: relative;
+      max-width: 980px;
+      margin: 32px auto 0;
+      padding: 28px 28px 26px;
+      border-radius: 24px;
+      border: 1px solid var(--line-soft);
+      background:
+        radial-gradient(circle at top left, rgba(15, 23, 42, 0.8), rgba(2, 2, 11, 0.98)),
+        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.7), rgba(2, 2, 11, 0.98));
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) auto;
+      gap: 40px;
+      align-items: center;
+      overflow: visible;
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.96);
     }
 
     .about-text {
@@ -194,20 +202,17 @@
 
     .about-photo {
       position: relative;
-      flex-shrink: 0;
-      width: 280px;
-      height: 320px;
-      overflow: hidden;
+      width: 260px;
+      height: 300px;
+      transform: translate(12px, -32px); /* foto invadindo a borda do card */
     }
 
-    /* LAYER DE FUNDO COMO SE O BACKGROUND ESTIVESSE "QUEBRADO" E A FOTO POR BAIXO */
     .about-photo::before {
       content: "";
       position: absolute;
       inset: 0;
       border-radius: 24px;
       border: 1px solid var(--line-strong);
-      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.95);
       background:
         radial-gradient(circle at 18% 20%, transparent 0 40%, rgba(3, 7, 18, 0.96) 60%),
         radial-gradient(circle at 82% 72%, transparent 0 34%, rgba(3, 7, 18, 0.97) 58%),
@@ -225,7 +230,7 @@
       filter: grayscale(100%) contrast(1.08) brightness(1.02);
       opacity: 0.98;
       transform: translate3d(0, 0, 0);
-      z-index: 0; /* foto por baixo do background quebrado */
+      z-index: 0;
     }
 
     /* SKILLS */
@@ -449,10 +454,23 @@
 
     @media (max-width: 780px) {
       .about-wrapper {
-        flex-direction: column;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 22px 20px 20px;
         text-align: center;
-        gap: 32px;
       }
+
+      .about-photo {
+        margin: 0 auto;
+        transform: translate(0, -16px);
+        width: min(80vw, 280px);
+        height: 300px;
+      }
+
+      #about .section-body {
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
 
       .about-photo {
         width: min(80vw, 320px);
