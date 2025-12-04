@@ -27,7 +27,6 @@
       scroll-behavior: smooth;
     }
 
-    /* FUNDO */
     body {
       min-height: 100vh;
       background: radial-gradient(circle at top, #020617 0, #02020b 45%, #02020b 100%);
@@ -164,7 +163,9 @@
     }
 
     #about .section-body {
-      font-size: 0.9rem;
+      font-size: 0.9rem; /* levemente menor na seção Sobre Mim */
+      max-width: 460px;  /* caixa de texto mais estreita */
+      margin: 0;         /* alinha dentro do flex em vez de centralizar */
     }
 
     .section-body p + p {
@@ -179,8 +180,9 @@
     /* SOBRE MIM COM FOTO LADO A LADO */
     .about-wrapper {
       display: flex;
+      flex-direction: row-reverse;  /* foto à direita, texto à esquerda */
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 40px;
       max-width: 900px;
       margin: 24px auto 0;
@@ -194,7 +196,7 @@
       flex-shrink: 0;
     }
 
-    /* FOTO INTEGRADA, SEM MOLDURA */
+    /* FOTO INTEGRADA, BORDAS QUE SE DISSIPAM */
     .about-photo img {
       display: block;
       width: 260px;
@@ -203,11 +205,13 @@
       border: none;
       box-shadow: none;
       border-radius: 0;
-      filter: grayscale(100%) contrast(1.1);
-      opacity: 0.95;
+      filter: grayscale(100%) contrast(1.08);
+      opacity: 0.96;
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
     }
 
-    /* SKILLS (CHIPS) */
+    /* SKILLS */
     .skills {
       display: flex;
       flex-wrap: wrap;
@@ -283,7 +287,7 @@
       font-weight: 300;
     }
 
-    /* MODAL (skills) – inalterado */
+    /* MODAL DE HABILIDADES */
     .skill-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -439,6 +443,7 @@
 
       #about .section-body {
         text-align: center;
+        margin: 0 auto;
       }
     }
 
@@ -454,14 +459,6 @@
   </style>
 </head>
 <body>
-
-  <!-- TESTE VISUAL DA IMAGEM NO TOPO (PODE REMOVER DEPOIS QUE FUNCIONAR) -->
-  <div style="padding: 16px; text-align: center;">
-    <p style="margin-bottom: 8px; font-size: 12px; color: #9ca3af;">
-      TESTE IMAGEM DIRETA: assets/bruno-viegas.jpg
-    </p>
-    <img src="assets/bruno-viegas.jpg" alt="Teste foto Bruno" style="max-width: 140px; border: 2px dashed #ff4b4b;">
-  </div>
 
   <header>
     <div class="shell">
