@@ -180,10 +180,10 @@
     /* SOBRE MIM COM FOTO LADO A LADO */
     .about-wrapper {
       display: flex;
-      flex-direction: row-reverse;  /* foto à direita, texto à esquerda */
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
+      flex-direction: row; /* foto à esquerda, texto à direita */
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 48px;
       max-width: 900px;
       margin: 24px auto 0;
     }
@@ -193,22 +193,39 @@
     }
 
     .about-photo {
+      position: relative;
       flex-shrink: 0;
+      width: 280px;
+      height: 320px;
+      overflow: hidden;
     }
 
-    /* FOTO INTEGRADA, BORDAS QUE SE DISSIPAM */
+    /* LAYER DE FUNDO COMO SE O BACKGROUND ESTIVESSE "QUEBRADO" E A FOTO POR BAIXO */
+    .about-photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.95);
+      background:
+        radial-gradient(circle at 18% 20%, transparent 0 40%, rgba(3, 7, 18, 0.96) 60%),
+        radial-gradient(circle at 82% 72%, transparent 0 34%, rgba(3, 7, 18, 0.97) 58%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .about-photo img {
-      display: block;
-      width: 260px;
-      height: auto;
+      position: absolute;
+      inset: -18px;
+      width: calc(100% + 36px);
+      height: calc(100% + 36px);
       object-fit: cover;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      filter: grayscale(100%) contrast(1.08);
-      opacity: 0.96;
-      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+      filter: grayscale(100%) contrast(1.08) brightness(1.02);
+      opacity: 0.98;
+      transform: translate3d(0, 0, 0);
+      z-index: 0; /* foto por baixo do background quebrado */
     }
 
     /* SKILLS */
@@ -434,11 +451,12 @@
       .about-wrapper {
         flex-direction: column;
         text-align: center;
+        gap: 32px;
       }
 
-      .about-photo img {
-        width: 82%;
-        max-width: 320px;
+      .about-photo {
+        width: min(80vw, 320px);
+        height: 340px;
       }
 
       #about .section-body {
