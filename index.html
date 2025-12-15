@@ -294,7 +294,7 @@
   <main>
     <div class="shell">
 
-      <section id="skills">
+      <section id="skills" class="reveal">
         <h2>Habilidades</h2>
         <div class="section-body">
           <div class="skills">
@@ -310,12 +310,12 @@
         </div>
       </section>
 
-      <section id="projects">
+      <section id="projects" class="reveal">
         <h2>Projetos</h2>
         <div class="section-body">
           <div class="projects-grid">
 
-            <article class="project-card">
+            <article class="project-card reveal">
               <h3>Automação de Coleta de Dados em Site</h3>
               <p><strong>Problema:</strong> Processo manual de conferência de dados que tomava tempo diariamente.</p>
               <p><strong>Solução:</strong> Script que acessa automaticamente o site, coleta informações e salva em planilha.</p>
@@ -323,13 +323,13 @@
               <p><strong>Resultados:</strong> Redução de 20 min para 10 segundos por execução.</p>
             </article>
 
-            <article class="project-card">
+            <article class="project-card reveal">
               <h3>Automação para Atualização de Planilhas</h3>
               <p><strong>Problema:</strong> Atualização manual diária.</p>
               <p><strong>Solução:</strong> Apps Script que atualiza valores, limpa campos e envia alertas.</p>
             </article>
 
-            <article class="project-card">
+            <article class="project-card reveal">
               <h3>RPA - Preenchimento Automático de Formulários</h3>
               <p><strong>Problema:</strong> Inserção repetitiva de dados.</p>
               <p><strong>Solução:</strong> Automação que preenche formulários.</p>
@@ -340,7 +340,7 @@
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" class="reveal">
         <h2>Contato</h2>
         <div class="section-body">
           <p class="contact-text">Quer automatizar um processo, reduzir custos ou acelerar sua operação?</p>
@@ -366,49 +366,24 @@
   </div>
 
   <script>
-    (function () {
-      const skillInfo = {
-        python: { title: 'Python', text: 'Linguagem de programação versátil, ideal para automações, integrações e scripts.', examples: ['Bots para coletar dados.','Integração com APIs.','Rotinas agendadas.'] },
-        selenium: { title: 'Selenium', text: 'Automação de navegadores simulando ações humanas.', examples: ['Preencher formulários.','Coletar informações após login.','Testar fluxos web.'] },
-        gas: { title: 'Google Apps Script', text: 'Automatiza produtos Google usando JavaScript.', examples: ['Atualizar planilhas.','Enviar e-mails automáticos.','Criar menus personalizados.'] },
-        web: { title: 'Automação Web', text: 'Automação de fluxos completos em sistemas online.', examples: ['Login automático.','Consulta e registro de dados.','Download de relatórios.'] },
-        rpa: { title: 'RPA', text: 'Automação Robótica de Processos.', examples: ['Ler dados e lançar em sistemas.','Mover informações entre ERPs.','Padronizar cadastros.'] },
-        n8n: { title: 'n8n', text: 'Automação low-code para integrações.', examples: ['Criar fluxos reativos.','Sincronizar plataformas.','Automatizar pipelines.'] },
-        apis: { title: 'APIs', text: 'Integração com sistemas externos.', examples: ['Conectar ferramentas.','Buscar dados externos.','Usar webhooks.'] },
-        sheets: { title: 'Automação de Planilhas', text: 'Reduz tarefas repetitivas e organiza dados.', examples: ['Limpeza automática.','Dashboards atualizados.','Relatórios prontos.'] }
-      };
+    document.addEventListener("DOMContentLoaded", function() {
+      const revealElements = document.querySelectorAll('.reveal');
+      const header = document.querySelector('header');
 
-      const backdrop = document.querySelector('.skill-modal-backdrop');
-      const modalTitle = document.querySelector('.skill-modal-title');
-      const modalText = document.querySelector('.skill-modal-text');
-      const modalList = document.querySelector('.skill-modal-list');
-      const closeBtn = document.querySelector('.skill-modal-close');
-      const skillButtons = document.querySelectorAll('.skill');
-
-      function openModal(key) {
-        const info = skillInfo[key];
-        modalTitle.textContent = info.title;
-        modalText.textContent = info.text;
-        modalList.innerHTML = '';
-        info.examples.forEach(ex => {
-          const li = document.createElement('li');
-          li.textContent = ex;
-          modalList.appendChild(li);
+      function onScroll() {
+        revealElements.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+            el.classList.add('is-in');
+          }
         });
-        backdrop.classList.add('is-open');
-        backdrop.setAttribute('aria-hidden', 'false');
+
+        if (window.scrollY > 50) header.classList.add('shrunk');
+        else header.classList.remove('shrunk');
       }
 
-      function closeModal() {
-        backdrop.classList.remove('is-open');
-        backdrop.setAttribute('aria-hidden', 'true');
-      }
-
-      skillButtons.forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.skill)));
-      closeBtn.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    })();
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    });
   </script>
 </body>
 </html>
