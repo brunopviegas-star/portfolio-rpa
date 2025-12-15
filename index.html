@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
+  <title>Portfolio</title>
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -36,6 +36,12 @@
     }
 
     .shell{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+    /* ENTRADA SUAVE */
+    @media (prefers-reduced-motion:no-preference){
+      .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease;}
+      .reveal.is-in{opacity:1;transform:translateY(0);}
+    }
 
     header{
       border-bottom:1px solid var(--line-soft);
@@ -190,7 +196,77 @@
 
     /* MODAL */
     .skill-modal-backdrop{
-      position:fixed;inset:0
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      background:rgba(0,0,0,.72);opacity:0;pointer-events:none;z-index:40;
+      transition:opacity .2s ease;
+    }
+    .skill-modal-backdrop.is-open{opacity:1;pointer-events:auto;}
+
+    .skill-modal{
+      max-width:420px;width:100%;margin:0 18px;padding:20px 22px;
+      background:linear-gradient(180deg, rgba(2,6,23,.95), rgba(0,0,0,.75));
+      border-radius:16px;border:1px solid rgba(31,41,55,.9);
+      box-shadow:0 28px 90px rgba(0,0,0,.96);position:relative;animation:skillModalIn .24s ease;
+    }
+
+    @keyframes skillModalIn{from{transform:translateY(12px) scale(.98);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
+
+    .skill-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:1.1rem;}
+
+    .skill-modal-title{font-size:1rem;font-weight:500;text-transform:uppercase;margin-bottom:10px;color:var(--text-primary);}
+
+    .skill-modal-text{font-size:.92rem;color:var(--text-muted);margin-bottom:10px;}
+
+    .skill-modal-list{padding-left:18px;color:var(--text-muted);}
+    .skill-modal-list li + li{margin-top:6px;}
+
+    /* CONTATO */
+    .contact-text{font-size:.98rem;color:var(--text-muted);line-height:1.75;font-weight:400;}
+
+    .contact-link{
+      display:inline-block;
+      margin-top:16px;
+      padding:9px 22px;
+      border-radius:999px;
+      border:1px solid rgba(31,41,55,.9);
+      color:var(--text-primary);
+      text-decoration:none;
+      text-transform:uppercase;
+      font-size:.88rem;
+      background:linear-gradient(180deg, rgba(2,6,23,.85), rgba(0,0,0,.6));
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .contact-link:hover{
+      border-color:rgba(229,231,235,.9);
+      transform:translateY(-2px);
+      box-shadow:0 16px 50px rgba(0,0,0,.8);
+      background:linear-gradient(180deg, rgba(15,23,42,.95), rgba(2,6,23,.78));
+    }
+
+    footer{
+      border-top:1px solid var(--line-soft);
+      padding:18px 0 22px;
+      text-align:center;
+      font-size:.78rem;
+      color:var(--text-muted);
+      background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+    }
+
+    /* ACESSIBILIDADE: reduz animações */
+    @media (prefers-reduced-motion:reduce){
+      *{transition:none !important;animation:none !important;}
+    }
+
+    @media (max-width:880px){
+      .nav{margin-bottom:24px;}
+      .nav-links{flex-wrap:wrap;justify-content:center;row-gap:10px;}
+      header{padding-bottom:28px;}
+    }
+    @media (max-width:600px){
+      main{padding:28px 0 56px;}
+      section{padding:22px 0;}
+    }
   </style>
 </head>
 
