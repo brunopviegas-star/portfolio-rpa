@@ -383,4 +383,32 @@
       const modalText = document.querySelector('.skill-modal-text');
       const modalList = document.querySelector('.skill-modal-list');
       const closeBtn = document.querySelector('.skill-modal-close');
-      const skillButtons = document.querySelector
+      const skillButtons = document.querySelectorAll('.skill');
+
+      function openModal(key) {
+        const info = skillInfo[key];
+        modalTitle.textContent = info.title;
+        modalText.textContent = info.text;
+        modalList.innerHTML = '';
+        info.examples.forEach(ex => {
+          const li = document.createElement('li');
+          li.textContent = ex;
+          modalList.appendChild(li);
+        });
+        backdrop.classList.add('is-open');
+        backdrop.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('is-open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+
+      skillButtons.forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.skill)));
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    })();
+  </script>
+</body>
+</html>
