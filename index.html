@@ -48,7 +48,6 @@
     .nav-links a:hover{color:#e5e7eb;}
     .nav-links a:hover::after{width:100%;}
 
-    /* HERO (SEM TÍTULO) */
     .hero{padding-top:10px;}
     .hero-content{max-width:720px;margin:0 auto;text-align:center;}
     .hero-subtitle{
@@ -75,7 +74,6 @@
     .section-body p + p{margin-top:12px;}
     #skills .section-body,#contact .section-body{text-align:center;}
 
-    /* SKILLS */
     .skills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
     .skill{
       border-radius:999px;border:1px solid var(--line-soft);
@@ -88,7 +86,6 @@
       border-color:#e5e7eb;background:rgba(15,23,42,.9);
     }
 
-    /* PROJETOS */
     .projects-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -257,7 +254,6 @@
         <h2>Projetos</h2>
         <div class="section-body">
           <div class="projects-grid">
-
             <article class="project-card">
               <h3>Automação de Coleta de Dados em Site</h3>
               <p><strong>Problema:</strong> Processo manual de conferência de dados que tomava tempo diariamente.</p>
@@ -279,7 +275,6 @@
               <p><strong>Solução:</strong> Automação que preenche formulários.</p>
               <p><strong>Tecnologias:</strong> Python, Selenium.</p>
             </article>
-
           </div>
         </div>
       </section>
@@ -317,8 +312,21 @@
 
       <h3 class="contact-modal-title" id="contactModalTitle">Contato rápido</h3>
 
-      <form class="contact-form" id="contactForm">
+      <!-- POST NATIVO (sem fetch) -->
+      <form
+        class="contact-form"
+        id="contactForm"
+        method="POST"
+        action="https://script.google.com/macros/s/AKfycbzNvHq_gmMUJ5LnxNktQK3IsTF1V5yqA_A-qq3tb5LSqxzU3FkEPVuHMm1djKphU5fj/exec"
+        target="lead_iframe"
+      >
+        <!-- honeypot -->
         <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" />
+
+        <!-- token + meta -->
+        <input type="hidden" name="token" value="rpa2025" />
+        <input type="hidden" name="page" id="leadPage" />
+        <input type="hidden" name="timestamp" id="leadTimestamp" />
 
         <label>
           <span>Nome *</span>
@@ -347,6 +355,9 @@
 
         <p class="contact-status" id="contactStatus" aria-live="polite"></p>
       </form>
+
+      <!-- iframe oculto que recebe o POST -->
+      <iframe name="lead_iframe" id="lead_iframe" style="display:none;"></iframe>
     </div>
   </div>
 
@@ -397,12 +408,9 @@
     })();
   </script>
 
-  <!-- SCRIPT CONTATO (URLENCODED) -->
+  <!-- SCRIPT CONTATO (POST NATIVO + IFRAME) -->
   <script>
     (function () {
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNvHq_gmMUJ5LnxNktQK3IsTF1V5yqA_A-qq3tb5LSqxzU3FkEPVuHMm1djKphU5fj/exec";
-      const FORM_TOKEN = "rpa2025";
-
       const openBtn = document.getElementById('open-contact');
       const backdrop = document.querySelector('.contact-modal-backdrop');
       const closeBtnX = document.querySelector('.contact-modal-close');
@@ -410,6 +418,12 @@
       const form = document.getElementById('contactForm');
       const statusEl = document.getElementById('contactStatus');
       const submitBtn = document.getElementById('submitContact');
+
+      const pageInput = document.getElementById('leadPage');
+      const tsInput = document.getElementById('leadTimestamp');
+      const iframe = document.getElementById('lead_iframe');
+
+      let submitting = false;
 
       function openModal() {
         backdrop.classList.add('is-open');
@@ -430,39 +444,27 @@
       backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
+      form.addEventListener('submit', (e) => {
         const hp = form.querySelector('input[name="website"]');
-        if (hp && hp.value.trim()) return;
+        if (hp && hp.value.trim()) { e.preventDefault(); return; }
 
+        pageInput.value = window.location.href;
+        tsInput.value = new Date().toISOString();
+
+        submitting = true;
         submitBtn.disabled = true;
         statusEl.textContent = "Enviando...";
+        // deixa o POST seguir normalmente para o iframe
+      });
 
-        const fd = new FormData(form);
-        const data = new URLSearchParams();
-        for (const [k, v] of fd.entries()) data.append(k, v);
+      iframe.addEventListener('load', () => {
+        if (!submitting) return; // evita o load inicial do iframe
+        submitting = false;
 
-        data.append("token", FORM_TOKEN);
-        data.append("page", window.location.href);
-        data.append("timestamp", new Date().toISOString());
-
-        try {
-          await fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-            body: data.toString()
-          });
-
-          statusEl.textContent = "Enviado. Vou te chamar no WhatsApp.";
-          form.reset();
-          setTimeout(closeModal, 900);
-        } catch (err) {
-          statusEl.textContent = "Falha ao enviar. Tente novamente.";
-        } finally {
-          submitBtn.disabled = false;
-        }
+        statusEl.textContent = "Enviado. Vou te chamar no WhatsApp.";
+        form.reset();
+        submitBtn.disabled = false;
+        setTimeout(closeModal, 900);
       });
     })();
   </script>
