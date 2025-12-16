@@ -4,14 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
-
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#02010a;
-      --text-primary:#b0b0b0; /* Texto principal mais equilibrado */
-      --text-secondary:#8a8a8a; /* Texto secundário mais forte */
+      --text-primary:#b0b0b0;
+      --text-secondary:#8a8a8a;
       --text-muted:#cbd5e1;
       --line-soft:#111827;
       --line-strong:#1f2937;
@@ -20,10 +18,8 @@
       --glow:rgba(229,231,235,.22);
       --shadow:0 24px 70px rgba(0,0,0,.92);
     }
-
     *{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
-
     body{
       min-height:100vh;
       background:
@@ -34,15 +30,7 @@
       -webkit-font-smoothing:antialiased;
       overflow-x:hidden;
     }
-
     .shell{max-width:1080px;margin:0 auto;padding:0 20px;}
-
-    /* ENTRADA SUAVE */
-    @media (prefers-reduced-motion:no-preference){
-      .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease;}
-      .reveal.is-in{opacity:1;transform:translateY(0);}
-    }
-
     header{
       border-bottom:1px solid var(--line-soft);
       padding:22px 0 40px;
@@ -50,7 +38,6 @@
       background:radial-gradient(circle at top,rgba(15,23,42,0.45),transparent 70%);
       width: 100%;
     }
-
     .nav{display:flex;align-items:center;justify-content:center;margin-bottom:28px;}
     .nav-links{display:flex;align-items:center;gap:18px;}
     .nav-links a{
@@ -66,7 +53,6 @@
     }
     .nav-links a:hover{color:#ffffff;transform:translateY(-1px);}
     .nav-links a:hover::after{width:100%;}
-
     .hero{padding-top:10px;}
     .hero-content{max-width:760px;margin:0 auto;text-align:center;}
     .hero-subtitle{
@@ -76,11 +62,9 @@
       text-transform:uppercase;color:var(--text-secondary);
       opacity:.95;
     }
-
     main{padding:0 0 56px;}
     section{padding:32px 0;border-top:1px solid var(--line-soft);width:100%;}
     section:first-of-type{border-top:none;}
-
     h2{
       font-family:"Space Grotesk",sans-serif;
       font-size:.9rem;font-weight:400;letter-spacing:.22em;
@@ -88,15 +72,12 @@
       color:var(--text-secondary);
       text-align:center;
     }
-
     .section-body{
       max-width:820px;margin:0 auto;font-size:.98rem;line-height:1.85;
       color:var(--text-muted);font-weight:400;
     }
     .section-body p + p{margin-top:12px;}
     #skills .section-body,#contact .section-body{text-align:center;}
-
-    /* SKILLS */
     .skills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
     .skill{
       border-radius:999px;
@@ -116,15 +97,12 @@
       border-color:rgba(229,231,235,.9);
       background:linear-gradient(180deg, rgba(15,23,42,.95), rgba(2,6,23,.72));
     }
-
-    /* PROJETOS — MAIS MODERNO */
     .projects-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:18px;
       margin-top:12px;
     }
-
     .project-card{
       position:relative;
       padding:18px 16px;
@@ -138,8 +116,6 @@
       overflow:hidden;
       isolation:isolate;
     }
-
-    /* brilho sutil no topo */
     .project-card::before{
       content:"";
       position:absolute;
@@ -150,8 +126,6 @@
       z-index:-1;
       transition:opacity .28s ease;
     }
-
-    /* linha gradiente na borda */
     .project-card::after{
       content:"";
       position:absolute;
@@ -166,7 +140,6 @@
       opacity:.35;
       transition:opacity .28s ease;
     }
-
     .project-card:hover{
       transform:translateY(-10px) scale(1.02);
       border-color:rgba(229,231,235,.85);
@@ -175,7 +148,6 @@
     }
     .project-card:hover::before{opacity:.9;}
     .project-card:hover::after{opacity:.62;}
-
     .project-card h3{
       font-size:1rem;
       font-weight:500;
@@ -184,7 +156,6 @@
       margin-bottom:10px;
       color:var(--text-primary);
     }
-
     .project-card p{
       font-size:.92rem;
       color:var(--text-muted);
@@ -192,38 +163,8 @@
       font-weight:400;
       margin-top:8px;
     }
-
     .project-card strong{color:var(--text-secondary);font-weight:500;}
-
-    /* MODAL */
-    .skill-modal-backdrop{
-      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-      background:rgba(0,0,0,.72);opacity:0;pointer-events:none;z-index:40;
-      transition:opacity .2s ease;
-    }
-    .skill-modal-backdrop.is-open{opacity:1;pointer-events:auto;}
-
-    .skill-modal{
-      max-width:420px;width:100%;margin:0 18px;padding:20px 22px;
-      background:linear-gradient(180deg, rgba(2,6,23,.95), rgba(0,0,0,.75));
-      border-radius:16px;border:1px solid rgba(31,41,55,.9);
-      box-shadow:0 28px 90px rgba(0,0,0,.96);position:relative;animation:skillModalIn .24s ease;
-    }
-
-    @keyframes skillModalIn{from{transform:translateY(12px) scale(.98);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
-
-    .skill-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:1.1rem;}
-
-    .skill-modal-title{font-size:1rem;font-weight:500;text-transform:uppercase;margin-bottom:10px;color:var(--text-primary);}
-
-    .skill-modal-text{font-size:.92rem;color:var(--text-muted);margin-bottom:10px;}
-
-    .skill-modal-list{padding-left:18px;color:var(--text-muted);}
-    .skill-modal-list li + li{margin-top:6px;}
-
-    /* CONTATO */
     .contact-text{font-size:.98rem;color:var(--text-muted);line-height:1.75;font-weight:400;}
-
     .contact-link{
       display:inline-block;
       margin-top:16px;
@@ -237,14 +178,12 @@
       background:linear-gradient(180deg, rgba(2,6,23,.85), rgba(0,0,0,.6));
       transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
     }
-
     .contact-link:hover{
       border-color:rgba(229,231,235,.9);
       transform:translateY(-2px);
       box-shadow:0 16px 50px rgba(0,0,0,.8);
       background:linear-gradient(180deg, rgba(15,23,42,.95), rgba(2,6,23,.78));
     }
-
     footer{
       border-top:1px solid var(--line-soft);
       padding:18px 0 22px;
@@ -254,24 +193,8 @@
       background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
       width:100%;
     }
-
-    /* ACESSIBILIDADE: reduz animações */
-    @media (prefers-reduced-motion:reduce){
-      *{transition:none !important;animation:none !important;}
-    }
-
-    @media (max-width:880px){
-      .nav{margin-bottom:24px;}
-      .nav-links{flex-wrap:wrap;justify-content:center;row-gap:10px;}
-      header{padding-bottom:28px;}
-    }
-    @media (max-width:600px){
-      main{padding:28px 0 56px;}
-      section{padding:22px 0;}
-    }
   </style>
 </head>
-
 <body>
   <header>
     <div class="shell">
@@ -282,7 +205,6 @@
           <a href="#contact">Contato</a>
         </div>
       </div>
-
       <div class="hero">
         <div class="hero-content">
           <p class="hero-subtitle">AUTOMAÇÃO DE PROCESSOS | RPA | SCRIPTS | WEB AUTOMATION</p>
@@ -290,11 +212,9 @@
       </div>
     </div>
   </header>
-
   <main>
     <div class="shell">
-
-      <section id="skills" class="reveal">
+      <section id="skills">
         <h2>Habilidades</h2>
         <div class="section-body">
           <div class="skills">
@@ -307,40 +227,108 @@
             <button class="skill" data-skill="apis">APIs</button>
             <button class="skill" data-skill="sheets">Automação de Planilhas</button>
           </div>
+          <div class="skill-descriptions">
+            <div id="python-description" class="skill-description">
+              <h3>Python</h3>
+              <p>Linguagem de programação versátil, ideal para automações, integrações e scripts.</p>
+              <ul>
+                <li>Bots para coletar dados.</li>
+                <li>Integração com APIs.</li>
+                <li>Rotinas agendadas.</li>
+              </ul>
+            </div>
+            <div id="selenium-description" class="skill-description">
+              <h3>Selenium</h3>
+              <p>Automação de navegadores simulando ações humanas.</p>
+              <ul>
+                <li>Preencher formulários.</li>
+                <li>Coletar informações após login.</li>
+                <li>Testar fluxos web.</li>
+              </ul>
+            </div>
+            <div id="gas-description" class="skill-description">
+              <h3>Google Apps Script</h3>
+              <p>Automatiza produtos Google usando JavaScript.</p>
+              <ul>
+                <li>Atualizar planilhas.</li>
+                <li>Enviar e-mails automáticos.</li>
+                <li>Criar menus personalizados.</li>
+              </ul>
+            </div>
+            <div id="web-description" class="skill-description">
+              <h3>Automação Web</h3>
+              <p>Automação de fluxos completos em sistemas online.</p>
+              <ul>
+                <li>Login automático.</li>
+                <li>Consulta e registro de dados.</li>
+                <li>Download de relatórios.</li>
+              </ul>
+            </div>
+            <div id="rpa-description" class="skill-description">
+              <h3>RPA</h3>
+              <p>Automação Robótica de Processos.</p>
+              <ul>
+                <li>Ler dados e lançar em sistemas.</li>
+                <li>Mover informações entre ERPs.</li>
+                <li>Padronizar cadastros.</li>
+              </ul>
+            </div>
+            <div id="n8n-description" class="skill-description">
+              <h3>n8n</h3>
+              <p>Automação low-code para integrações.</p>
+              <ul>
+                <li>Criar fluxos reativos.</li>
+                <li>Sincronizar plataformas.</li>
+                <li>Automatizar pipelines.</li>
+              </ul>
+            </div>
+            <div id="apis-description" class="skill-description">
+              <h3>APIs</h3>
+              <p>Integração com sistemas externos.</p>
+              <ul>
+                <li>Conectar ferramentas.</li>
+                <li>Buscar dados externos.</li>
+                <li>Usar webhooks.</li>
+              </ul>
+            </div>
+            <div id="sheets-description" class="skill-description">
+              <h3>Automação de Planilhas</h3>
+              <p>Reduz tarefas repetitivas e organiza dados.</p>
+              <ul>
+                <li>Limpeza automática.</li>
+                <li>Dashboards atualizados.</li>
+                <li>Relatórios prontos.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
-
-      <section id="projects" class="reveal">
+      <section id="projects">
         <h2>Projetos</h2>
         <div class="section-body">
           <div class="projects-grid">
-
-            <article class="project-card reveal">
+            <article class="project-card">
               <h3>Automação de Coleta de Dados em Site</h3>
               <p><strong>Problema:</strong> Processo manual de conferência de dados que tomava tempo diariamente.</p>
               <p><strong>Solução:</strong> Script que acessa automaticamente o site, coleta informações e salva em planilha.</p>
               <p><strong>Tecnologias:</strong> Python, Selenium.</p>
               <p><strong>Resultados:</strong> Redução de 20 min para 10 segundos por execução.</p>
             </article>
-
-            <article class="project-card reveal">
+            <article class="project-card">
               <h3>Automação para Atualização de Planilhas</h3>
               <p><strong>Problema:</strong> Atualização manual diária.</p>
               <p><strong>Solução:</strong> Apps Script que atualiza valores, limpa campos e envia alertas.</p>
             </article>
-
-            <article class="project-card reveal">
+            <article class="project-card">
               <h3>RPA - Preenchimento Automático de Formulários</h3>
               <p><strong>Problema:</strong> Inserção repetitiva de dados.</p>
               <p><strong>Solução:</strong> Automação que preenche formulários.</p>
               <p><strong>Tecnologias:</strong> Python, Selenium.</p>
             </article>
-
           </div>
         </div>
       </section>
-
-      <section id="contact" class="reveal">
+      <section id="contact">
         <h2>Contato</h2>
         <div class="section-body">
           <p class="contact-text">Quer automatizar um processo, reduzir custos ou acelerar sua operação?</p>
@@ -348,42 +336,10 @@
           <a class="contact-link" href="mailto:seuemail@exemplo.com">Entrar em contato</a>
         </div>
       </section>
-
     </div>
   </main>
-
   <footer>
     <div class="shell">© 2025</div>
   </footer>
-
-  <div class="skill-modal-backdrop" aria-hidden="true">
-    <div class="skill-modal" role="dialog" aria-modal="true">
-      <button class="skill-modal-close" aria-label="Fechar">&times;</button>
-      <h3 class="skill-modal-title"></h3>
-      <p class="skill-modal-text"></p>
-      <ul class="skill-modal-list"></ul>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const revealElements = document.querySelectorAll('.reveal');
-      const header = document.querySelector('header');
-
-      function onScroll() {
-        revealElements.forEach(el => {
-          if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
-            el.classList.add('is-in');
-          }
-        });
-
-        if (window.scrollY > 50) header.classList.add('shrunk');
-        else header.classList.remove('shrunk');
-      }
-
-      window.addEventListener('scroll', onScroll);
-      onScroll();
-    });
-  </script>
 </body>
 </html>
